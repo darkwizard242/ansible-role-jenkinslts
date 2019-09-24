@@ -1,7 +1,4 @@
 ---
-dependencies:
-  - darkwizard242.openjdk8
-
 galaxy_info:
   role_name: jenkinslts
   author: Ali Muhammad
@@ -30,3 +27,5 @@ galaxy_info:
     - cd
     - devops
     - agile
+
+dependencies: []

@@ -2,6 +2,10 @@
 # defaults file for jenkinslts
 jenkinslts_user: jenkins
 jenkinslts_group: jenkins
+jenkinslts_javadependency_debian: openjdk-8-jdk
+jenkinslts_javadependency_el: java-1.8.0-openjdk-devel
+jenkinslts_javadependency_debian_desired_state: present
+jenkinslts_javadependency_el_desired_state: present
 jenkinslts_group_desired_state: present
 jenkinslts_user_home: /var/lib/jenkins
 jenkinslts_user_shell: /bin/false

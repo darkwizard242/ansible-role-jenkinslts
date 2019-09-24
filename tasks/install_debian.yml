@@ -17,6 +17,11 @@
     force_apt_get: yes
     update_cache: yes
   when: packages['apt-transport-https'] is not defined
+- name: Installing {{ jenkinslts_javadependency_debian}} on Debian based systems as it is required for {{ jenkinslts_app_name }}.
+  apt:
+    name: "{{ jenkinslts_javadependency_debian }}"
+    state: "{{ jenkinslts_javadependency_debian_desired_state }}"
+    force_apt_get: yes
 - name: Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}" on Debian based systems.
   group:
     name: "{{ jenkinslts_group }}"
