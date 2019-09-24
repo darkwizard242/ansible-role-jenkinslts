@@ -34,7 +34,6 @@ before_script:
   - cd ../
   - mv ansible-role-$ROLE_NAME darkwizard242.$ROLE_NAME
   - cd darkwizard242.$ROLE_NAME
-  - ansible-galaxy install darkwizard242.openjdk8
 
 script:
   - sonar-scanner -Dsonar.projectVersion=$TRAVIS_BRANCH\_$TRAVIS_JOB_NUMBER
