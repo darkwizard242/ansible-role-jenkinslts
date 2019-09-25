@@ -51,6 +51,9 @@
     force_apt_get: yes
     update_cache: yes
   notify:
+    - "set_{{ jenkinslts_app_name }}_user_on_debian_systems"
+    - "set_{{ jenkinslts_app_name }}_group_on_debian_systems"
+    - "set_{{ jenkinslts_app_name }}_home_on_debian_systems"
     - "set_{{ jenkinslts_app_name }}_http_port_on_debian_systems"
     - "set_{{ jenkinslts_app_name }}_heapsize_max_on_debian_systems"
     - "set_{{ jenkinslts_service_name }}_service_state"

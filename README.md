@@ -13,16 +13,17 @@ Available variables are listed below (located in `defaults/main.yml`):
 ### Variables List:
 
 ```yaml
-jenkinslts_group: jenkins
-jenkinslts_group_desired_state: present
 jenkinslts_user: jenkins
-jenkinslts_user_home: /var/lib/jenkins
-jenkinslts_user_shell: /bin/false
-jenkinslts_user_desired_state: present
+jenkinslts_group: jenkins
 jenkinslts_javadependency_debian: openjdk-8-jdk
 jenkinslts_javadependency_el: java-1.8.0-openjdk-devel
 jenkinslts_javadependency_debian_desired_state: present
 jenkinslts_javadependency_el_desired_state: present
+jenkinslts_group_desired_state: present
+jenkinslts_user_home: "/var/lib/{{ jenkinslts_user }}"
+jenkinslts_user_shell: /bin/false
+jenkinslts_user_desired_state: present
+jenkinslts_app_name: jenkins
 jenkinslts_debian_gpg_key: https://pkg.jenkins.io/debian/jenkins.io.key
 jenkinslts_el_gpg_key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
 jenkinslts_repo_debian: deb https://pkg.jenkins.io/debian-stable binary/
@@ -33,7 +34,6 @@ jenkinslts_repo_el: http://pkg.jenkins.io/redhat
 jenkinslts_repo_el_filename: "{{ jenkinslts_app_name }}"
 jenkinslts_repo_el_gpgcheck: yes
 jenkinslts_repo_desired_state: present
-jenkinslts_app_name: jenkins
 jenkinslts_desired_state: present
 jenkinslts_default_debain_config_file: /etc/default/jenkins
 jenkinslts_default_el_config_file: /etc/sysconfig/jenkins
@@ -45,14 +45,14 @@ jenkinslts_service_desired_boot_enabled: yes
 jenkinslts_app_check_status_code: 403
 jenkinslts_app_check_status_code_retries: 10
 jenkinslts_app_check_status_code_delay: 5
-jenkinslts_app_admin_password_file: /var/lib/jenkins/secrets/initialAdminPassword
+jenkinslts_app_admin_password_file: "{{ jenkinslts_user_home }}/secrets/initialAdminPassword"
 ```
 
 ### Variables table:
 
 Variable                                       | Value (default)                                    | Description
 ---------------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-jenkinslts_group                               | jenkins                                            | Name of the group that the jenkins owner will belong to.
+jenkinslts_group                               | jenkins                                            | Name of the group that the jenkins owner will belong to. Jenkins Group argument is only required on Debian based systems, not on EL based systems.
 jenkinslts_group_desired_state                 | present                                            | `present` indicates creating the group if it doesn't exist. Alternative is `absent`.
 jenkinslts_user                                | jenkins                                            | Name of the user that the jenkins will be owned by.
 jenkinslts_user_home                           | /var/lib/jenkins                                   | Home directory for jenkins user specified above as `jenkinslts_user`. Since Jenkins by default is installed in `/var/lib/jenkins`. It is recommended to use that directory as such.
