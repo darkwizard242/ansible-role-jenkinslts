@@ -6,6 +6,9 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
+JAVA_DEBIAN = 'openjdk-8-jdk'
+JAVA_EL = 'java-1.8.0-openjdk-devel'
+JAVA_BINARY_PATH = '/usr/bin/java'
 JENKINS_USER = 'jenkins'
 JENKINS_GROUP = 'jenkins'
 JENKINS_DEBIAN_REPO = '/etc/apt/sources.list.d/jenkins.list'
@@ -15,7 +18,8 @@ JENKINS_EL_STABLE = 'redhat'
 JENKINS_BINARY_PATH = '/usr/lib/jenkins'
 JENKINS_PACKAGE = 'jenkins'
 JENKINS_HOME = '/var/lib/jenkins'
-JENKINS_HTTP_PORT = 'HTTP_PORT=8080'
+JENKINS_DEBIAN_HTTP_PORT = 'HTTP_PORT=8080'
+JENKINS_EL_HTTP_PORT = 'JENKINS_PORT="8080"'
 JENKINS_HEAPSIZE_MAX = 'JAVA_ARGS="-Xmx256m"'
 JENKINS_SERVICE = 'jenkins'
 JENKINS_URL = 'http://localhost:8080'
@@ -62,6 +66,19 @@ def test_jenkinslts_repofile_stableurl(host):
       host.file('/etc/yum.repos.d/jenkins.repo').contains == JENKINS_EL_STABLE
 
 
+def test_java_package_installed(host):
+    host.package("JAVA_DEBIAN").is_installed or \
+      host.package("JAVA_EL").is_installed
+
+
+def test_java_binary_exists(host):
+    host.file('JAVA_BINARY_PATH').exists
+
+
+def test_java_binary_symlink(host):
+    host.file('JAVA_BINARY_PATH').is_symlink
+
+
 def test_jenkinslts_package_installed(host):
     host.package("JENKINS_PACKAGE").is_installed
 
@@ -79,8 +96,8 @@ def test_jenkinslts_binary_whereis(host):
 
 
 def test_jenkinslts_http_port(host):
-    host.file('/etc/default/jenkins').contains == JENKINS_HTTP_PORT or \
-      host.file('/etc/sysconfig/jenkins').contains == JENKINS_HTTP_PORT
+    host.file('/etc/default/jenkins').contains == JENKINS_DEBIAN_HTTP_PORT or \
+      host.file('/etc/sysconfig/jenkins').contains == JENKINS_EL_HTTP_PORT
 
 
 def test_jenkinslts_heapsize_max(host):
