@@ -1,0 +1,89 @@
+---
+# handlers file for {{ jenkinslts_app_name }}
+
+- name: "set_{{ jenkinslts_app_name }}_user_on_debian_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_debain_config_file }}"
+    regexp: '^JENKINS\_USER\=[a-zA-Z]*'
+    line: "JENKINS_USER={{ jenkinslts_user }}"
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_app_name }}_user_on_el_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_el_config_file }}"
+    regexp: '^JENKINS\_USER\=\"[a-zA-Z]*\"'
+    line: 'JENKINS_USER="{{ jenkinslts_user }}"'
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_app_name }}_group_on_debian_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_debain_config_file }}"
+    regexp: '^JENKINS\_GROUP\=[a-zA-Z]*'
+    line: "JENKINS_GROUP={{ jenkinslts_group }}"
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_app_name }}_home_on_debian_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_debain_config_file }}"
+    regexp: '^JENKINS\_HOME\=[a-zA-Z/]'
+    line: "JENKINS_HOME={{ jenkinslts_user_home }}"
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_app_name }}_home_on_el_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_el_config_file }}"
+    regexp: '^JENKINS\_HOME\=\"*[a-zA-Z0-9]*\"'
+    line: 'JENKINS_HOME="{{ jenkinslts_user_home }}"'
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_app_name }}_http_port_on_debian_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_debain_config_file }}"
+    regexp: '^HTTP\_PORT\=[0-9]*'
+    line: "HTTP_PORT={{ jenkinslts_app_port }}"
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_app_name }}_http_port_on_el_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_el_config_file }}"
+    regexp: '^JENKINS\_PORT\=\"[0-9]*\"'
+    line: 'JENKINS_PORT="{{ jenkinslts_app_port }}"'
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_app_name }}_heapsize_max_on_debian_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_debain_config_file }}"
+    regexp: '^#JAVA\_ARGS\=\"\-Xmx[0-9]*m\"'
+    line: 'JAVA_ARGS="-Xmx{{ jenkinslts_app_heapsize_max }}"'
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_app_name }}_heapsize_max_on_el_systems"
+  lineinfile:
+    path: "{{ jenkinslts_default_el_config_file }}"
+    regexp: '^JENKINS\_ARGS\=\"\"'
+    line: 'JENKINS_ARGS="-Xmx{{ jenkinslts_app_heapsize_max }}"'
+    state: present
+    backup: yes
+- name: "set_{{ jenkinslts_service_name }}_service_state"
+  service:
+    name: "{{ jenkinslts_service_name }}"
+    state: "{{ jenkinslts_service_desired_state }}"
+- name: "set_{{ jenkinslts_service_name }}_service_boot_state"
+  service:
+    name: "{{ jenkinslts_service_name }}"
+    enabled: "{{ jenkinslts_service_desired_boot_enabled }}"
+- name: "check_{{ jenkinslts_app_name }}_url"
+  uri:
+    url: "http://localhost:{{ jenkinslts_app_port }}"
+    status_code: "{{ jenkinslts_app_check_status_code }}"
+  retries: "{{ jenkinslts_app_check_status_code_retries }}"
+  delay: "{{ jenkinslts_app_check_status_code_delay }}"
+  register: result
+  until: ('status' in result) and (result.status == 403)
+- name: "register_{{ jenkinslts_app_name }}_admin_password"
+  slurp:
+    src: "{{ jenkinslts_app_admin_password_file }}"
+  register: jenkins_admin_password_is
+- name: "print_{{ jenkinslts_app_name }}_admin_password"
+  debug:
+    msg: "Jenkins initial admin password is: {{ jenkins_admin_password_is['content'] }}"

@@ -1,0 +1,31 @@
+---
+galaxy_info:
+  role_name: jenkinslts
+  author: Ali Muhammad
+  description: Jenkins LTS version installation on Ubuntu xenial/bionic, Debian stretch and CentOS7.
+  company: none
+  license: MIT
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+    - name: Debian
+      versions:
+        - stretch
+    - name: EL
+      versions:
+        - 7
+
+  galaxy_tags:
+    - jenkinslts
+    - os
+    - system
+    - ci
+    - cd
+    - devops
+    - agile
+
+dependencies: []

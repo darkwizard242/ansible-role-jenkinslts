@@ -1,0 +1,63 @@
+---
+# tasks file for jenkinslts - Debian/Ubuntu
+
+- name: Install python3-apt on Debian based systems, required for package_facts.
+  apt:
+    name: python3-apt
+    state: present
+    force_apt_get: yes
+    update_cache: yes
+- name: Gather package facts to verify if apt-transport-https is installed on Debian based systems
+  package_facts:
+    manager: apt
+- name: Install apt-transport-https if currently not in installed state on Debian based systems.
+  apt:
+    name: apt-transport-https
+    state: present
+    force_apt_get: yes
+    update_cache: yes
+  when: packages['apt-transport-https'] is not defined
+- name: Installing {{ jenkinslts_javadependency_debian }} on Debian based systems as it is required for {{ jenkinslts_app_name }}.
+  apt:
+    name: "{{ jenkinslts_javadependency_debian }}"
+    state: "{{ jenkinslts_javadependency_debian_desired_state }}"
+    force_apt_get: yes
+- name: Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}" on Debian based systems.
+  group:
+    name: "{{ jenkinslts_group }}"
+    state: "{{ jenkinslts_user_desired_state }}"
+- name: Add user "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}" on Debian based systems.
+  user:
+    name: "{{ jenkinslts_user }}"
+    comment: Jenkins Automation Server
+    group: "{{ jenkinslts_group }}"
+    home: "{{ jenkinslts_user_home }}"
+    shell: "{{ jenkinslts_user_shell }}"
+    state: "{{ jenkinslts_user_desired_state }}"
+- name: Add gpg signing key for {{ jenkinslts_app_name }}.
+  apt_key:
+    url: "{{ jenkinslts_debian_gpg_key }}"
+    state: present
+- name: Adding repository {{ jenkinslts_repo_debian }} on Debian based systems.
+  apt_repository:
+    repo: "{{ jenkinslts_repo_debian }}"
+    state: "{{ jenkinslts_repo_desired_state }}"
+    filename: "{{ jenkinslts_repo_debian_filename }}"
+    update_cache: yes
+- name: Installing {{ jenkinslts_app_name }} on Debian based systems.
+  apt:
+    name: "{{ jenkinslts_app_name }}"
+    state: "{{ jenkinslts_desired_state }}"
+    force_apt_get: yes
+    update_cache: yes
+  notify:
+    - "set_{{ jenkinslts_app_name }}_user_on_debian_systems"
+    - "set_{{ jenkinslts_app_name }}_group_on_debian_systems"
+    - "set_{{ jenkinslts_app_name }}_home_on_debian_systems"
+    - "set_{{ jenkinslts_app_name }}_http_port_on_debian_systems"
+    - "set_{{ jenkinslts_app_name }}_heapsize_max_on_debian_systems"
+    - "set_{{ jenkinslts_service_name }}_service_state"
+    - "set_{{ jenkinslts_service_name }}_service_boot_state"
+    - "check_{{ jenkinslts_app_name }}_url"
+    - "register_{{ jenkinslts_app_name }}_admin_password"
+    - "print_{{ jenkinslts_app_name }}_admin_password"
