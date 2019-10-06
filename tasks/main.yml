@@ -1,5 +1,5 @@
 ---
-# tasks file for googlechrome
+# tasks file for jenkinslts
 
 - name: Import install_debian.yml if OS family is Debian
   import_tasks: install_debian.yml
