@@ -74,8 +74,8 @@ def test_jenkinslts_binary_directory_check(host):
 
 def test_jenkinslts_binary_whereis(host):
     assert host.check_output('whereis jenkins') == \
-      'jenkins: /usr/share/jenkins' or host.check_output('whereis jenkins') == \
-      'jenkins: /usr/lib/jenkins'
+      'jenkins: /usr/share/jenkins' or host.check_output('whereis jenkins') \
+      == 'jenkins: /usr/lib/jenkins'
 
 
 def test_jenkinslts_service_is_running(host):
