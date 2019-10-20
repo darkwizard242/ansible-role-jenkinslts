@@ -77,7 +77,7 @@ def test_jenkinslts_binary_whereis(host):
 
 def test_jenkinslts_http_port(host):
     host.file('/etc/default/jenkins').contains == 'HTTP_PORT=8080' or \
-      host.file('/etc/sysconfig/jenkins').contains == 'JENKINS_PORT="8080"''
+      host.file('/etc/sysconfig/jenkins').contains == 'JENKINS_PORT="8080"'
 
 
 def test_jenkinslts_heapsize_max(host):
