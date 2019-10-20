@@ -81,8 +81,8 @@ def test_jenkinslts_http_port(host):
 
 
 def test_jenkinslts_heapsize_max(host):
-    assert host.file('/etc/default/jenkins').contains == 'JAVA_ARGS="-Xmx256m"' or \
-      host.file('/etc/sysconfig/jenkins').contains == 'JAVA_ARGS="-Xmx256m"'
+    assert host.file('/etc/default/jenkins').contains == 'JAVA_ARGS="-Xmx256m"'\
+      or host.file('/etc/sysconfig/jenkins').contains == 'JAVA_ARGS="-Xmx256m"'
 
 
 def test_jenkinslts_service_is_running(host):
