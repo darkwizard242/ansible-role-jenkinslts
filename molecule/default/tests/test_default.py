@@ -66,7 +66,7 @@ def test_jenkinslts_binary_directory_exists(host):
 
 
 def test_jenkinslts_binary_directory_check(host):
-    assert host.file('/usr/share/jenkins/jenkins.war').is_directory
+    assert host.file('/usr/share/jenkins').is_directory
 
 
 def test_jenkinslts_binary_whereis(host):
