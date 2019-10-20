@@ -6,134 +6,103 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-JAVA_DEBIAN = 'openjdk-8-jdk'
-JAVA_EL = 'java-1.8.0-openjdk-devel'
-JAVA_BINARY_PATH = '/usr/bin/java'
-JENKINS_USER = 'jenkins'
-JENKINS_GROUP = 'jenkins'
-JENKINS_DEBIAN_REPO = '/etc/apt/sources.list.d/jenkins.list'
-JENKINS_EL_REPO = '/etc/yum.repos.d/jenkins.repo'
-JENKINS_DEBIAN_STABLE = 'debian-stable'
-JENKINS_EL_STABLE = 'redhat'
-JENKINS_BINARY_PATH = '/usr/lib/jenkins'
-JENKINS_PACKAGE = 'jenkins'
-JENKINS_HOME = '/var/lib/jenkins'
-JENKINS_DEBIAN_HTTP_PORT = 'HTTP_PORT=8080'
-JENKINS_EL_HTTP_PORT = 'JENKINS_PORT="8080"'
-JENKINS_HEAPSIZE_MAX = 'JAVA_ARGS="-Xmx256m"'
-JENKINS_SERVICE = 'jenkins'
-JENKINS_URL = 'http://localhost:8080'
-JENKINS_PASSWORD_FILE = '/var/lib/jenkins/secrets/initialAdminPassword'
-
-
 def test_jenkinslts_user_exists(host):
-    host.user('JENKINS_USER')
+    assert host.user('jenkins')
 
 
 def test_jenkinslts_group_exists(host):
-    host.group('JENKINS_GROUP')
+    assert host.group('JENKINS_GROUP')
 
 
 def test_jenkinslts_home_exists(host):
-    host.file('JENKINS_HOME').exists
+    assert host.file('/var/lib/jenkins').exists
 
 
 def test_jenkinslts_home_isdirectory(host):
-    host.file('JENKINS_HOME').is_directory
+    assert host.file('/var/lib/jenkins').is_directory
 
 
 def test_jenkinslts_home_ownedbyuser(host):
-    host.file('/var/lib/jenkins').user == JENKINS_USER
+    assert host.file('/var/lib/jenkins').user == 'jenkins'
 
 
 def test_jenkinslts_home_ownedbygroup(host):
-    host.file('/var/lib/jenkins').group == JENKINS_GROUP
+    assert host.file('/var/lib/jenkins').group == 'jenkins'
 
 
 def test_jenkinslts_repofile_exists(host):
-    host.file('JENKINS_DEBIAN_REPO').exists or \
-      host.file('JENKINS_EL_REPO').exists
+    assert host.file('/etc/apt/sources.list.d/jenkins.list').exists or \
+      host.file('/etc/yum.repos.d/jenkins.repo').exists
 
 
 def test_jenkinslts_repofile_isfile(host):
-    host.file('JENKINS_DEBIAN_REPO').is_file or \
-      host.file('JENKINS_EL_REPO').is_file
-
-
-def test_jenkinslts_repofile_stableurl(host):
-    host.file('/etc/apt/sources.list.d/jenkins.list').contains == \
-      JENKINS_DEBIAN_STABLE or \
-      host.file('/etc/yum.repos.d/jenkins.repo').contains == JENKINS_EL_STABLE
+    assert host.file('/etc/apt/sources.list.d/jenkins.list').is_file or \
+      host.file('/etc/yum.repos.d/jenkins.repo').is_file
 
 
 def test_java_package_installed(host):
-    host.package("JAVA_DEBIAN").is_installed or \
-      host.package("JAVA_EL").is_installed
+    assert host.package("openjdk-8-jdk").is_installed or \
+      host.package("java-1.8.0-openjdk-devel").is_installed
 
 
 def test_java_binary_exists(host):
-    host.file('JAVA_BINARY_PATH').exists
+    host.file('/usr/bin/java').exists
 
 
 def test_java_binary_symlink(host):
-    host.file('JAVA_BINARY_PATH').is_symlink
+    assert host.file('/usr/bin/java').is_symlink
 
 
 def test_jenkinslts_package_installed(host):
-    host.package("JENKINS_PACKAGE").is_installed
+    assert host.package("jenkins").is_installed
 
 
 def test_jenkinslts_binary_exists(host):
-    host.file('JENKINS_BINARY_PATH').exists
+    assert host.file('/usr/share/jenkins/jenkins.war').exists or \
+      host.file('/usr/lib/jenkins/jenkins.war').exists
 
 
-def test_jenkinslts_binary_directory(host):
-    host.file('JENKINS_BINARY_PATH').is_directory
+def test_jenkinslts_binary_directory_exists(host):
+    assert host.file('/usr/share/jenkins').exists or \
+      host.file('/usr/lib/jenkins').exists
+
+
+def test_jenkinslts_binary_directory_check(host):
+    assert host.file('/usr/share/jenkins').is_directory or \
+      host.file('/usr/lib/jenkins').is_directory
 
 
 def test_jenkinslts_binary_whereis(host):
-    host.check_output('whereis jenkins') == JENKINS_BINARY_PATH
-
-
-def test_jenkinslts_http_port(host):
-    host.file('/etc/default/jenkins').contains == JENKINS_DEBIAN_HTTP_PORT or \
-      host.file('/etc/sysconfig/jenkins').contains == JENKINS_EL_HTTP_PORT
-
-
-def test_jenkinslts_heapsize_max(host):
-    host.file('/etc/default/jenkins').contains == JENKINS_HEAPSIZE_MAX or \
-      host.file('/etc/sysconfig/jenkins').contains == JENKINS_HEAPSIZE_MAX
+    assert host.check_output('whereis jenkins') == \
+      'jenkins: /usr/share/jenkins' or host.check_output('whereis jenkins') \
+      == 'jenkins: /usr/lib/jenkins'
 
 
 def test_jenkinslts_service_is_running(host):
-    host.service('JENKINS_SERVICE').is_running
+    assert host.service('jenkins').is_running
 
 
 def test_jenkinslts_service_is_enabled(host):
-    host.service('JENKINS_SERVICE').is_enabled
+    assert host.service('jenkins').is_enabled
 
 
 def test_jenkinslts_process_is_running(host):
-    host.process.get(user="jenkins", comm="java")
-
-
-def test_jenkinslts_url_is_reachable(host):
-    host.addr('JENKINS_URL').is_reachable
+    assert host.process.get(user="jenkins", comm="java")
 
 
 def test_jenkinslts_passwordfile_exists(host):
-    host.file('JENKINS_PASSWORD_FILE').exists
+    assert host.file('/var/lib/jenkins/secrets/initialAdminPassword').exists
 
 
 def test_jenkinslts_passwordfile_isfile(host):
-    host.file('JENKINS_PASSWORD_FILE').is_file
+    assert host.file('/var/lib/jenkins/secrets/initialAdminPassword').is_file
 
 
 def test_jenkinslts_passwordfile_ownedbyuser(host):
-    host.file('/var/lib/jenkins/secrets/initialAdminPassword').user \
-      == JENKINS_USER
+    assert host.file('/var/lib/jenkins/secrets/initialAdminPassword').user \
+      == 'jenkins'
 
 
 def test_jenkinslts_passwordfile_ownedbygroup(host):
-    host.file('/var/lib/jenkins/secrets/initialAdminPassword').group \
-      == JENKINS_GROUP
+    assert host.file('/var/lib/jenkins/secrets/initialAdminPassword').group \
+      == 'jenkins'
