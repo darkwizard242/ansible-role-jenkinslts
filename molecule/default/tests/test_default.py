@@ -58,20 +58,24 @@ def test_jenkinslts_package_installed(host):
 
 
 def test_jenkinslts_binary_exists(host):
-    assert host.file('/usr/share/jenkins/jenkins.war').exists
+    assert host.file('/usr/share/jenkins/jenkins.war').exists or \
+      host.file('/usr/lib/jenkins/jenkins.war').exists
 
 
 def test_jenkinslts_binary_directory_exists(host):
-    assert host.file('/usr/share/jenkins').exists
+    assert host.file('/usr/share/jenkins').exists or \
+      host.file('/usr/lib/jenkins').exists
 
 
 def test_jenkinslts_binary_directory_check(host):
-    assert host.file('/usr/share/jenkins').is_directory
+    assert host.file('/usr/share/jenkins').is_directory or \
+      host.file('/usr/lib/jenkins').is_directory
 
 
 def test_jenkinslts_binary_whereis(host):
     assert host.check_output('whereis jenkins') == \
-      'jenkins: /usr/share/jenkins'
+      'jenkins: /usr/share/jenkins' or host.check_output('whereis jenkins') == \
+      'jenkins: /usr/lib/jenkins'
 
 
 def test_jenkinslts_service_is_running(host):
