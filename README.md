@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/darkwizard242/ansible-role-jenkinslts.svg?branch=master)](https://travis-ci.com/darkwizard242/ansible-role-jenkinslts) ![Ansible Role](https://img.shields.io/ansible/role/43603?color=dark%20green%20) ![Ansible Role](https://img.shields.io/ansible/role/d/43603?label=role%20downloads) ![Ansible Quality Score](https://img.shields.io/ansible/quality/43603?label=ansible%20quality%20score) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ansible-role-jenkinslts&metric=alert_status)](https://sonarcloud.io/dashboard?id=ansible-role-jenkinslts) ![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/darkwizard242/ansible-role-jenkinslts?label=release) ![GitHub repo size](https://img.shields.io/github/repo-size/darkwizard242/ansible-role-jenkinslts?color=orange&style=flat-square)
+
 # Ansible Role: jenkinslts
 
 Role to install (_by default_) `jenkins` package (LTS Version) for Debian based and EL based systems or uninstall (_if passed as var_) on **Debian** based and **EL** based systems.
