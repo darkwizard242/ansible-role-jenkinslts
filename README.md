@@ -2,7 +2,7 @@
 
 # Ansible Role: jenkinslts
 
-Role to install (_by default_) `jenkins` package (LTS Version) for Debian based and EL based systems or uninstall (_if passed as var_) on **Debian** based and **EL** based systems.
+Role to install (_by default_) [jenkins](https://jenkins.io/download/lts/) package (LTS Version) for Debian based and EL based systems or uninstall (_if passed as var_) on **Debian** based and **EL** based systems.
 
 ## Requirements
 
@@ -98,7 +98,7 @@ For default behaviour of role (i.e. installation of **jenkins** package) in ansi
 ```yaml
 - hosts: servers
   roles:
-    - role: darkwizard242.jenkinslts
+    - darkwizard242.jenkinslts
 ```
 
 For customizing behavior of role (i.e. installation of latest **jenkins** package) in ansible playbooks.
@@ -106,9 +106,9 @@ For customizing behavior of role (i.e. installation of latest **jenkins** packag
 ```yaml
 - hosts: servers
   roles:
-    - role: darkwizard242.jenkinslts
-      vars:
-        jenkinslts_desired_state: latest
+    - darkwizard242.jenkinslts
+  vars:
+    jenkinslts_desired_state: latest
 ```
 
 For customizing behavior of role (i.e. un-installation of **jenkins** package) in ansible playbooks.
@@ -116,9 +116,9 @@ For customizing behavior of role (i.e. un-installation of **jenkins** package) i
 ```yaml
 - hosts: servers
   roles:
-    - role: darkwizard242.jenkinslts
-      vars:
-        jenkinslts_desired_state: absent
+    - darkwizard242.jenkinslts
+  vars:
+    jenkinslts_desired_state: absent
 ```
 
 ## License
