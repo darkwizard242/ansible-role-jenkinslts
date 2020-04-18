@@ -11,13 +11,13 @@ jenkinslts_user_home: "/var/lib/{{ jenkinslts_user }}"
 jenkinslts_user_shell: /bin/false
 jenkinslts_user_desired_state: present
 jenkinslts_app_name: jenkins
-jenkinslts_debian_gpg_key: https://pkg.jenkins.io/debian/jenkins.io.key
-jenkinslts_el_gpg_key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+jenkinslts_debian_gpg_key: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+jenkinslts_el_gpg_key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 jenkinslts_repo_debian: deb https://pkg.jenkins.io/debian-stable binary/
 jenkinslts_repo_debian_filename: "{{ jenkinslts_app_name }}"
 jenkinslts_repo_el_name: jenkins
 jenkinslts_repo_el_description: Jenkins
-jenkinslts_repo_el: http://pkg.jenkins.io/redhat
+jenkinslts_repo_el: http://pkg.jenkins.io/redhat-stable
 jenkinslts_repo_el_filename: "{{ jenkinslts_app_name }}"
 jenkinslts_repo_el_gpgcheck: yes
 jenkinslts_repo_desired_state: present
