@@ -2,7 +2,7 @@
 
 # Ansible Role: jenkinslts
 
-Role to install (_by default_) [jenkins](https://jenkins.io/download/lts/) package (LTS Version) for Debian based and EL based systems or uninstall (_if passed as var_) on **Debian** based and **EL** based systems.
+Role to install (_by default_) LTS version of [Jenkins](https://jenkins.io/download/lts/) for Debian based and EL based systems or uninstall (_if passed as var_) on **Debian** based and **EL** based systems.
 
 ## Requirements
 
@@ -26,13 +26,13 @@ jenkinslts_user_home: "/var/lib/{{ jenkinslts_user }}"
 jenkinslts_user_shell: /bin/false
 jenkinslts_user_desired_state: present
 jenkinslts_app_name: jenkins
-jenkinslts_debian_gpg_key: https://pkg.jenkins.io/debian/jenkins.io.key
-jenkinslts_el_gpg_key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+jenkinslts_debian_gpg_key: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+jenkinslts_el_gpg_key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 jenkinslts_repo_debian: deb https://pkg.jenkins.io/debian-stable binary/
 jenkinslts_repo_debian_filename: "{{ jenkinslts_app_name }}"
 jenkinslts_repo_el_name: jenkins
 jenkinslts_repo_el_description: Jenkins
-jenkinslts_repo_el: http://pkg.jenkins.io/redhat
+jenkinslts_repo_el: http://pkg.jenkins.io/redhat-stable
 jenkinslts_repo_el_filename: "{{ jenkinslts_app_name }}"
 jenkinslts_repo_el_gpgcheck: yes
 jenkinslts_repo_desired_state: present
@@ -64,13 +64,13 @@ jenkinslts_javadependency_debian               | openjdk-8-jdk                  
 jenkinslts_javadependency_el                   | java-1.8.0-openjdk-devel                                  | Java 8 package to install on EL based systems. Jenkins LTS support OpenJDK8.
 jenkinslts_javadependency_debian_desired_state | present                                                   | State of the jenkinslts_javadependency_debian package. Whether to install, verify if available or to uninstall (i.e. ansible apt module values: `present`, `latest`, or `absent`)
 jenkinslts_javadependency_el_desired_state     | present                                                   | State of the jenkinslts_javadependency_el package. Whether to install, verify if available or to uninstall (i.e. ansible apt module values: `present`, `latest`, or `absent`)
-jenkinslts_debian_gpg_key                      | <https://pkg.jenkins.io/debian/jenkins.io.key>            | Jenkins GPG required on Debian based systems.
-jenkinslts_el_gpg_key                          | <https://jenkins-ci.org/redhat/jenkins-ci.org.key>        | Jenkins GPG required on EL based systems.
+jenkinslts_debian_gpg_key                      | <https://pkg.jenkins.io/debian-stable/jenkins.io.key>     | Jenkins GPG required on Debian based systems.
+jenkinslts_el_gpg_key                          | <https://pkg.jenkins.io/redhat-stable/jenkins.io.key>     | Jenkins GPG required on EL based systems.
 jenkinslts_repo_debian                         | deb <https://pkg.jenkins.io/debian-stable> binary/        | Repository marking to add for Debian based systems.
 jenkinslts_repo_debian_filename                | "{{ jenkinslts_app_name }}"                               | Name of the repository file that will be stored at `/etc/apt/sources.list.d/` on Debian based systems. Defaults to the variable value for "{{ jenkinslts_app_name }}" which is `jenkins` .
 jenkinslts_repo_el_name                        | jenkins                                                   | Repository name for Jenkins on EL based systems.
 jenkinslts_repo_el_description                 | Jenkins                                                   | Description to be added in EL based repository file for Jenkins.
-jenkinslts_repo_el                             | <http://pkg.jenkins.io/redhat>                            | Repository `baseurl` for Jenkins on EL based systems.
+jenkinslts_repo_el                             | <http://pkg.jenkins.io/redhat-stable>                     | Repository `baseurl` for Jenkins on EL based systems.
 jenkinslts_repo_el_gpgcheck                    | yes                                                       | Boolean for whether to perform gpg check against Jenkins on EL based systems.
 jenkinslts_repo_desired_state                  | present                                                   | `present` indicates creating the repository file if it doesn't exist on Debian or EL based systems. Alternative is `absent` (not recommended as it will prevent from installation of **jenkins** pacakge).
 jenkinslts_app_name                            | jenkins                                                   | Name of Jenkins LTS (Long Term Support) application i.e. `jenkins`
