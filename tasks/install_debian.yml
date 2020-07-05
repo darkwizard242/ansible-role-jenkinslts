@@ -1,32 +1,33 @@
 ---
-# tasks file for jenkinslts - Debian/Ubuntu
+# tasks file for jenkinslts - Debian/Ubuntu Family
 
-- name: Install python3-apt on Debian based systems, required for package_facts.
+- name: Debian/Ubuntu Family | Install python3-apt on Debian based systems, required for package_facts.
   apt:
     name: python3-apt
     state: present
     force_apt_get: yes
     update_cache: yes
-# - name: Gather package facts to verify if apt-transport-https is installed on Debian based systems
-#   package_facts:
-#     manager: apt
-- name: Install apt-transport-https if currently not in installed state on Debian based systems.
+
+- name: Debian/Ubuntu Family | Install apt-transport-https if currently not in installed state.
   apt:
     name: apt-transport-https
     state: present
     force_apt_get: yes
     update_cache: yes
   # when: packages['apt-transport-https'] is not defined
-- name: Installing {{ jenkinslts_javadependency_debian }} on Debian based systems as it is required for {{ jenkinslts_app_name }}.
+
+- name: Debian/Ubuntu Family | Installing {{ jenkinslts_javadependency_debian }} as it is required for {{ jenkinslts_app_name }}.
   apt:
     name: "{{ jenkinslts_javadependency_debian }}"
     state: "{{ jenkinslts_javadependency_debian_desired_state }}"
     force_apt_get: yes
-- name: Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}" on Debian based systems.
+
+- name: Debian/Ubuntu Family | Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
   group:
     name: "{{ jenkinslts_group }}"
     state: "{{ jenkinslts_user_desired_state }}"
-- name: Add user "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}" on Debian based systems.
+
+- name: Debian/Ubuntu Family | Add user "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
   user:
     name: "{{ jenkinslts_user }}"
     comment: Jenkins Automation Server
@@ -34,17 +35,20 @@
     home: "{{ jenkinslts_user_home }}"
     shell: "{{ jenkinslts_user_shell }}"
     state: "{{ jenkinslts_user_desired_state }}"
-- name: Add gpg signing key for {{ jenkinslts_app_name }}.
+
+- name: Debian/Ubuntu Family | Add gpg signing key for {{ jenkinslts_app_name }}.
   apt_key:
     url: "{{ jenkinslts_debian_gpg_key }}"
     state: present
-- name: Adding repository {{ jenkinslts_repo_debian }} on Debian based systems.
+
+- name: Debian/Ubuntu Family | Adding repository {{ jenkinslts_repo_debian }}
   apt_repository:
     repo: "{{ jenkinslts_repo_debian }}"
     state: "{{ jenkinslts_repo_desired_state }}"
     filename: "{{ jenkinslts_repo_debian_filename }}"
     update_cache: yes
-- name: Installing {{ jenkinslts_app_name }} on Debian based systems.
+
+- name: Debian/Ubuntu Family | Installing {{ jenkinslts_app_name }}
   apt:
     name: "{{ jenkinslts_app_name }}"
     state: "{{ jenkinslts_desired_state }}"

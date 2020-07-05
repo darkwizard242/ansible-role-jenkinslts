@@ -1,16 +1,18 @@
 ---
-# tasks file for jenkinslts - EL
+# tasks file for jenkinslts - EL Family
 
-- name: Installing {{ jenkinslts_javadependency_el }} on EL based systems as it is required for {{ jenkinslts_app_name }}.
+- name: EL Family | Installing {{ jenkinslts_javadependency_el }} as it is required for {{ jenkinslts_app_name }}.
   yum:
     name: "{{ jenkinslts_javadependency_el }}"
     state: "{{ jenkinslts_javadependency_el_desired_state }}"
     update_cache: yes
-- name: Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}" on EL based systems.
+
+- name: EL Family | Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
   group:
     name: "{{ jenkinslts_group }}"
     state: "{{ jenkinslts_user_desired_state }}"
-- name: Add user "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}" on EL based systems.
+
+- name: EL Family | Add user "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
   user:
     name: "{{ jenkinslts_user }}"
     comment: Jenkins Automation Server
@@ -18,7 +20,8 @@
     home: "{{ jenkinslts_user_home }}"
     shell: "{{ jenkinslts_user_shell }}"
     state: "{{ jenkinslts_user_desired_state }}"
-- name: Adding repository {{ jenkinslts_repo_el }} on EL based systems.
+
+- name: EL Family | Adding repository {{ jenkinslts_repo_el }}
   yum_repository:
     name: "{{ jenkinslts_repo_el_name }}"
     description: "{{ jenkinslts_repo_el_description }}"
@@ -27,7 +30,8 @@
     gpgkey: "{{ jenkinslts_el_gpg_key }}"
     file: "{{ jenkinslts_repo_el_filename }}"
     state: "{{ jenkinslts_repo_desired_state }}"
-- name: Installing {{ jenkinslts_app_name }} on EL based systems.
+
+- name: EL Family | Installing {{ jenkinslts_app_name }}
   yum:
     name: "{{ jenkinslts_app_name }}"
     state: "{{ jenkinslts_desired_state }}"
