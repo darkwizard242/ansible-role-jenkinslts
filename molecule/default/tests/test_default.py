@@ -69,7 +69,7 @@ def test_jenkinslts_repofile_exists(host):
     Tests if jenkins repo files for DEBIAN/EL systems exist.
     """
     assert host.file(DEBIAN_REPO_FILE).exists or \
-      host.file(EL_REPO_FILE).exists
+        host.file(EL_REPO_FILE).exists
 
 
 def test_jenkinslts_repofile_isfile(host):
