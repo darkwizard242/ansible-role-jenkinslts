@@ -77,7 +77,7 @@ def test_jenkinslts_repofile_isfile(host):
     Tests if jenkins repo files for DEBIAN/EL systems is file type.
     """
     assert host.file(DEBIAN_REPO_FILE).is_file or \
-      host.file(EL_REPO_FILE).is_file
+        host.file(EL_REPO_FILE).is_file
 
 
 def test_jenkinslts_package_installed(host):
@@ -92,7 +92,7 @@ def test_jenkinslts_binary_exists(host):
     Tests if jenkins binary file exists.
     """
     assert host.file(DEBIAN_WAR_FILE).exists or \
-      host.file(EL_WAR_FILE).exists
+        host.file(EL_WAR_FILE).exists
 
 
 def test_jenkinslts_binary_directory_exists(host):
@@ -100,7 +100,7 @@ def test_jenkinslts_binary_directory_exists(host):
     Tests if jenkins binary directory exists.
     """
     assert host.file(DEBIAN_BINARY_DIR).exists or \
-      host.file(EL_BINARY_DIR).exists
+        host.file(EL_BINARY_DIR).exists
 
 
 def test_jenkinslts_binary_directory_check(host):
@@ -108,7 +108,7 @@ def test_jenkinslts_binary_directory_check(host):
     Tests if jenkins binary directory is directory type.
     """
     assert host.file(DEBIAN_BINARY_DIR).is_directory or \
-      host.file(EL_BINARY_DIR).is_directory
+        host.file(EL_BINARY_DIR).is_directory
 
 
 def test_jenkinslts_binary_whereis(host):
