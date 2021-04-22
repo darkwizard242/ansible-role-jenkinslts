@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: jenkinslts
-  author: Ali Muhammad
+  author: darkwizard242
   description: Jenkins LTS version installation on Ubuntu xenial/bionic, Debian stretch and CentOS7.
   company: none
   license: MIT
