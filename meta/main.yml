@@ -29,5 +29,4 @@ galaxy_info:
     - devops
     - agile
 
-dependencies:
-  - role: darkwizard242.adoptopenjdk
+dependencies: []
