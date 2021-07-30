@@ -1,11 +1,11 @@
 ---
 # tasks file for jenkinslts - EL Family
 
-- name: EL Family | Installing {{ jenkinslts_javadependency_el }} as it is required for {{ jenkinslts_app_name }}.
-  yum:
-    name: "{{ jenkinslts_javadependency_el }}"
-    state: "{{ jenkinslts_javadependency_el_desired_state }}"
-    update_cache: yes
+# - name: EL Family | Installing {{ jenkinslts_javadependency_el }} as it is required for {{ jenkinslts_app_name }}.
+#   yum:
+#     name: "{{ jenkinslts_javadependency_el }}"
+#     state: "{{ jenkinslts_javadependency_el_desired_state }}"
+#     update_cache: yes
 
 - name: EL Family | Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
   group:
