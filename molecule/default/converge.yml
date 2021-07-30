@@ -2,6 +2,7 @@
 - name: Converge
   hosts: all
   roles:
+    - role: darkwizard242.adoptopenjdk
     - role: darkwizard242.jenkinslts
   vars:
     adoptopenjdk_app_name: adoptopenjdk-11-hotspot
