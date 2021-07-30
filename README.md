@@ -6,7 +6,9 @@ Role to install (_by default_) LTS version of [Jenkins](https://jenkins.io/downl
 
 ## Requirements
 
-None.
+Java is required for Jenkins.
+
+You can install Java using [darkwizard242.adoptopenjdk](https://galaxy.ansible.com/darkwizard242/adoptopenjdk) role.
 
 ## Role Variables
 
@@ -81,7 +83,9 @@ jenkinslts_app_admin_password_file             | "{{ jenkinslts_user_home }}/sec
 
 ## Dependencies
 
-None
+Java is required for Jenkins.
+
+You can install Java using [darkwizard242.adoptopenjdk](https://galaxy.ansible.com/darkwizard242/adoptopenjdk) role.
 
 ## Example Playbook
 
