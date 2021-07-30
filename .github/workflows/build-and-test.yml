@@ -6,7 +6,9 @@ on:
       - 'master'
   push:
     branches:
+      - 'feature*'
       - 'feature_*'
+      - 'feature/*'
       - 'master'
   schedule:
     - cron: '0 20 * * *'
