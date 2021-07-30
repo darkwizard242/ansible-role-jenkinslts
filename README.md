@@ -17,10 +17,6 @@ Available variables are listed below (located in `defaults/main.yml`):
 ```yaml
 jenkinslts_user: jenkins
 jenkinslts_group: jenkins
-jenkinslts_javadependency_debian: openjdk-8-jdk
-jenkinslts_javadependency_el: java-1.8.0-openjdk-devel
-jenkinslts_javadependency_debian_desired_state: present
-jenkinslts_javadependency_el_desired_state: present
 jenkinslts_group_desired_state: present
 jenkinslts_user_home: "/var/lib/{{ jenkinslts_user }}"
 jenkinslts_user_shell: /bin/false
@@ -60,10 +56,6 @@ jenkinslts_user                                | jenkins                        
 jenkinslts_user_home                           | "/var/lib/{{ jenkinslts_user }}"                          | Home directory for jenkins user specified above as `jenkinslts_user`. Since Jenkins by default is installed in `/var/lib/jenkins`. It is recommended to use that directory as such.
 jenkinslts_user_shell                          | /bin/false                                                | Shell for `jenkinslts_user`. Typically, shell usage is not required. Hence set to `/bin/false`.
 jenkinslts_user_desired_state                  | present                                                   | `present` indicates creating the user if it doesn't exist. Atlernative is `absent`.
-jenkinslts_javadependency_debian               | openjdk-8-jdk                                             | Java 8 package to install on Debian based systems. Jenkins LTS support OpenJDK8.
-jenkinslts_javadependency_el                   | java-1.8.0-openjdk-devel                                  | Java 8 package to install on EL based systems. Jenkins LTS support OpenJDK8.
-jenkinslts_javadependency_debian_desired_state | present                                                   | State of the jenkinslts_javadependency_debian package. Whether to install, verify if available or to uninstall (i.e. ansible apt module values: `present`, `latest`, or `absent`)
-jenkinslts_javadependency_el_desired_state     | present                                                   | State of the jenkinslts_javadependency_el package. Whether to install, verify if available or to uninstall (i.e. ansible apt module values: `present`, `latest`, or `absent`)
 jenkinslts_debian_gpg_key                      | <https://pkg.jenkins.io/debian-stable/jenkins.io.key>     | Jenkins GPG required on Debian based systems.
 jenkinslts_el_gpg_key                          | <https://pkg.jenkins.io/redhat-stable/jenkins.io.key>     | Jenkins GPG required on EL based systems.
 jenkinslts_repo_debian                         | deb <https://pkg.jenkins.io/debian-stable> binary/        | Repository marking to add for Debian based systems.
