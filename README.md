@@ -42,7 +42,7 @@ jenkinslts_app_heapsize_max: 256m
 jenkinslts_service_name: jenkins
 jenkinslts_service_desired_state: restarted
 jenkinslts_service_desired_boot_enabled: yes
-jenkinslts_app_check_status_code: 403
+jenkinslts_app_check_status_code: 200
 jenkinslts_app_check_status_code_retries: 10
 jenkinslts_app_check_status_code_delay: 5
 jenkinslts_app_admin_password_file: "{{ jenkinslts_user_home }}/secrets/initialAdminPassword"
@@ -76,7 +76,7 @@ jenkinslts_app_heapsize_max                    | 256m                           
 jenkinslts_service_name                        | jenkins                                                   | Default service name for Jenkins.
 jenkinslts_service_desired_state               | restarted                                                 | Desired state for Jenkins service.
 jenkinslts_service_desired_boot_enabled        | yes                                                       | Desired enabled/disabled state for Jenkins service.
-jenkinslts_app_check_status_code               | 403                                                       | Desired status code to return in a handler that checks for Jenkins URL post installation and restart. It is set to 403 as Jenkins initially requires user to input Admin password for initial setup.
+jenkinslts_app_check_status_code               | 403                                                       | Desired status code to return in a handler that checks for Jenkins URL post installation and restart. It is set to 200 as /login path returns HTTP code 200.
 jenkinslts_app_check_status_code_retries       | 10                                                        | URL curl retries set to 10 (as Jenkins may take some time to boot up.)
 jenkinslts_app_check_status_code_delay         | 5                                                         | Retries for URL curl set to 5.
 jenkinslts_app_admin_password_file             | "{{ jenkinslts_user_home }}/secrets/initialAdminPassword" | File that contains default admin password for Jenkins UI.
