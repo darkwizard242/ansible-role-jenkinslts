@@ -1,8 +1,8 @@
 ---
 # handlers file for jenkins
 
-## DEBIAN FAMILY RELATED
-- name: "Set JENKINS_USER for jenkins on Debian Family Systems"
+## Debian/Ubuntu Family Related
+- name: "Debian/Ubuntu Family | Set JENKINS_USER for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_debain_config_file }}"
     regexp: '^JENKINS\_USER\=[a-zA-Z]*'
@@ -10,7 +10,7 @@
     state: present
     backup: yes
 
-- name: "Set JENKINS_GROUP for jenkins on Debian Family Systems"
+- name: "Debian/Ubuntu Family | Set JENKINS_GROUP for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_debain_config_file }}"
     regexp: '^JENKINS\_GROUP\=[a-zA-Z]*'
@@ -18,7 +18,7 @@
     state: present
     backup: yes
 
-- name: "Set JENKINS_HOME for jenkins on Debian Family Systems"
+- name: "Debian/Ubuntu Family | Set JENKINS_HOME for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_debain_config_file }}"
     regexp: '^JENKINS\_HOME\=[a-zA-Z/]'
@@ -26,7 +26,7 @@
     state: present
     backup: yes
 
-- name: "Set HTTP_PORT for jenkins on Debian Family Systems"
+- name: "Debian/Ubuntu Family | Set HTTP_PORT for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_debain_config_file }}"
     regexp: '^HTTP\_PORT\=[0-9]*'
@@ -34,15 +34,18 @@
     state: present
     backup: yes
 
-- name: "Set JAVA_ARGS max heapsize for jenkins on Debian Family Systems"
+- name: "Debian/Ubuntu Family | Set JAVA_ARGS max heapsize for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_debain_config_file }}"
     regexp: '^#JAVA\_ARGS\=\"\-Xmx[0-9]*m\"'
     line: 'JAVA_ARGS="-Xmx{{ jenkinslts_app_heapsize_max }}"'
     state: present
     backup: yes
+## Debian/Ubuntu Family Related
 
-- name: "set_{{ jenkinslts_app_name }}_user_on_el_systems"
+
+## EL Family Related
+- name: "EL Family | Set JENKINS_USER for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_el_config_file }}"
     regexp: '^JENKINS\_USER\=\"[a-zA-Z]*\"'
@@ -50,7 +53,7 @@
     state: present
     backup: yes
 
-- name: "set_{{ jenkinslts_app_name }}_home_on_el_systems"
+- name: "EL Family | Set JENKINS_HOME for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_el_config_file }}"
     regexp: '^JENKINS\_HOME\=\"*[a-zA-Z0-9]*\"'
@@ -58,7 +61,7 @@
     state: present
     backup: yes
 
-- name: "set_{{ jenkinslts_app_name }}_http_port_on_el_systems"
+- name: "EL Family | Set JENKINS_PORT for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_el_config_file }}"
     regexp: '^JENKINS\_PORT\=\"[0-9]*\"'
@@ -66,19 +69,17 @@
     state: present
     backup: yes
 
-
-
-- name: "set_{{ jenkinslts_app_name }}_heapsize_max_on_el_systems"
+- name: "EL Family | Set JENKINS_ARGS max heapsize for jenkins"
   lineinfile:
     path: "{{ jenkinslts_default_el_config_file }}"
     regexp: '^JENKINS\_ARGS\=\"\"'
     line: 'JENKINS_ARGS="-Xmx{{ jenkinslts_app_heapsize_max }}"'
     state: present
     backup: yes
+## EL Family Related
 
 
 ## COMMON BETWEEN OPERATING SYSTEMS
-
 - name: "Set {{ jenkinslts_service_name }} service state"
   service:
     name: "{{ jenkinslts_service_name }}"
@@ -106,3 +107,4 @@
 - name: "Print {{ jenkinslts_app_name }} Admin Password"
   debug:
     msg: "Jenkins initial admin password is: {{ jenkins_admin_password['content'] }}"
+## COMMON BETWEEN OPERATING SYSTEMS
