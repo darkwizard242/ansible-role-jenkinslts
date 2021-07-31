@@ -54,11 +54,11 @@
     force_apt_get: yes
     update_cache: yes
   notify:
-    - "Set JENKINS_USER for jenkins on Debian Family Systems"
-    - "Set JENKINS_GROUP for jenkins on Debian Family Systems"
-    - "Set JENKINS_HOME for jenkins on Debian Family Systems"
-    - "Set HTTP_PORT for jenkins on Debian Family Systems"
-    - "Set JAVA_ARGS max heapsize for jenkins on Debian Family Systems"
+    - "Debian/Ubuntu Family | Set JENKINS_USER for jenkins"
+    - "Debian/Ubuntu Family | Set JENKINS_GROUP for jenkins"
+    - "Debian/Ubuntu Family | Set JENKINS_HOME for jenkins"
+    - "Debian/Ubuntu Family | Set HTTP_PORT for jenkins"
+    - "Debian/Ubuntu Family | Set JAVA_ARGS max heapsize for jenkins"
     - "Set {{ jenkinslts_service_name }} service state"
     - "Set {{ jenkinslts_service_name }} service boot state"
     - "Check {{ jenkinslts_app_name }} url for status code {{ jenkinslts_app_check_status_code }}"
