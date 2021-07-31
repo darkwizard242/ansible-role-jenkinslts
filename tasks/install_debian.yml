@@ -15,12 +15,6 @@
     force_apt_get: yes
     update_cache: yes
 
-# - name: Debian/Ubuntu Family | Installing {{ jenkinslts_javadependency_debian }} as it is required for {{ jenkinslts_app_name }}.
-#   apt:
-#     name: "{{ jenkinslts_javadependency_debian }}"
-#     state: "{{ jenkinslts_javadependency_debian_desired_state }}"
-#     force_apt_get: yes
-
 - name: Debian/Ubuntu Family | Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
   group:
     name: "{{ jenkinslts_group }}"
