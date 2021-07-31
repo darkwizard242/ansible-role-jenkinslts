@@ -25,7 +25,7 @@ jenkinslts_app_heapsize_max: 256m
 jenkinslts_service_name: jenkins
 jenkinslts_service_desired_state: restarted
 jenkinslts_service_desired_boot_enabled: yes
-jenkinslts_app_check_status_code: 403
+jenkinslts_app_check_status_code: 200
 jenkinslts_app_check_status_code_retries: 10
 jenkinslts_app_check_status_code_delay: 5
 jenkinslts_app_admin_password_file: "{{ jenkinslts_user_home }}/secrets/initialAdminPassword"
