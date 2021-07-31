@@ -54,13 +54,13 @@
     force_apt_get: yes
     update_cache: yes
   notify:
-    - "set_{{ jenkinslts_app_name }}_user_on_debian_systems"
-    - "set_{{ jenkinslts_app_name }}_group_on_debian_systems"
-    - "set_{{ jenkinslts_app_name }}_home_on_debian_systems"
-    - "set_{{ jenkinslts_app_name }}_http_port_on_debian_systems"
-    - "set_{{ jenkinslts_app_name }}_heapsize_max_on_debian_systems"
-    - "set_{{ jenkinslts_service_name }}_service_state"
-    - "set_{{ jenkinslts_service_name }}_service_boot_state"
-    - "check_{{ jenkinslts_app_name }}_url"
-    - "register_{{ jenkinslts_app_name }}_admin_password"
-    - "print_{{ jenkinslts_app_name }}_admin_password"
+    - "Set JENKINS_USER for jenkins on Debian Family Systems"
+    - "Set JENKINS_GROUP for jenkins on Debian Family Systems"
+    - "Set JENKINS_HOME for jenkins on Debian Family Systems"
+    - "Set HTTP_PORT for jenkins on Debian Family Systems"
+    - "Set JAVA_ARGS max heapsize for jenkins on Debian Family Systems"
+    - "Set {{ jenkinslts_service_name }} service state"
+    - "Set {{ jenkinslts_service_name }} service boot state"
+    - "Check {{ jenkinslts_app_name }} url for status code {{ jenkinslts_app_check_status_code }}"
+    - "Register {{ jenkinslts_app_name }} Admin password"
+    - "Print {{ jenkinslts_app_name }} Admin Password"
