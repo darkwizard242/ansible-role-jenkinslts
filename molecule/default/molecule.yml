@@ -1,6 +1,7 @@
 ---
 dependency:
   name: galaxy
+  requirements_file: requirements.yml
 driver:
   name: docker
 lint: |
@@ -20,6 +21,7 @@ provisioner:
 scenario:
   name: default
   test_sequence:
+    - dependency
     - lint
     - destroy
     - syntax

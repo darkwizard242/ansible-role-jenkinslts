@@ -6,7 +6,9 @@ on:
       - 'master'
   push:
     branches:
+      - 'feature*'
       - 'feature_*'
+      - 'feature/*'
       - 'master'
   schedule:
     - cron: '0 20 * * *'
@@ -44,7 +46,7 @@ jobs:
     strategy:
       max-parallel: 6
       matrix:
-        IMAGE: [ubuntu-18.04, ubuntu-16.04, debian-stretch]
+        IMAGE: [ubuntu-18.04, debian-buster, debian-stretch]
 
     steps:
 

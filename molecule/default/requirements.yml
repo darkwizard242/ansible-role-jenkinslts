@@ -1,0 +1,3 @@
+---
+# Ansible role to install darkwizard242.adoptopenjdk.
+- src: darkwizard242.adoptopenjdk
