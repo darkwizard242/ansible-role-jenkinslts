@@ -5,4 +5,5 @@
     - role: darkwizard242.adoptopenjdk
     - role: darkwizard242.jenkinslts
   vars:
+    ansible_python_interpreter: /usr/bin/python3
     adoptopenjdk_app_name: adoptopenjdk-11-hotspot
