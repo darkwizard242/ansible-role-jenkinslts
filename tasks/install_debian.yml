@@ -2,26 +2,26 @@
 # tasks file for jenkinslts - Debian/Ubuntu Family
 
 - name: Debian/Ubuntu Family | Install python3-apt on Debian based systems, required for package_facts.
-  apt:
+  ansible.builtin.apt:
     name: python3-apt
     state: present
     force_apt_get: yes
     update_cache: yes
 
 - name: Debian/Ubuntu Family | Install apt-transport-https if currently not in installed state.
-  apt:
+  ansible.builtin.apt:
     name: apt-transport-https
     state: present
     force_apt_get: yes
     update_cache: yes
 
 - name: Debian/Ubuntu Family | Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
-  group:
+  ansible.builtin.group:
     name: "{{ jenkinslts_group }}"
     state: "{{ jenkinslts_user_desired_state }}"
 
 - name: Debian/Ubuntu Family | Add user "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
-  user:
+  ansible.builtin.user:
     name: "{{ jenkinslts_user }}"
     comment: Jenkins Automation Server
     group: "{{ jenkinslts_group }}"
@@ -30,19 +30,19 @@
     state: "{{ jenkinslts_user_desired_state }}"
 
 - name: Debian/Ubuntu Family | Add gpg signing key for {{ jenkinslts_app_name }}.
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ jenkinslts_debian_gpg_key }}"
     state: present
 
 - name: Debian/Ubuntu Family | Adding repository {{ jenkinslts_repo_debian }}
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ jenkinslts_repo_debian }}"
     state: "{{ jenkinslts_repo_desired_state }}"
     filename: "{{ jenkinslts_repo_debian_filename }}"
     update_cache: yes
 
 - name: Debian/Ubuntu Family | Installing {{ jenkinslts_app_name }}
-  apt:
+  ansible.builtin.apt:
     name: "{{ jenkinslts_app_name }}"
     state: "{{ jenkinslts_desired_state }}"
     force_apt_get: yes
