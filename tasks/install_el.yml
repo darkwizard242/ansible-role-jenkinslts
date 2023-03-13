@@ -2,12 +2,12 @@
 # tasks file for jenkinslts - EL Family
 
 - name: EL Family | Add group "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
-  group:
+  ansible.builtin.group:
     name: "{{ jenkinslts_group }}"
     state: "{{ jenkinslts_user_desired_state }}"
 
 - name: EL Family | Add user "{{ jenkinslts_user }}" as a pre-requisite for "{{ jenkinslts_app_name }}"
-  user:
+  ansible.builtin.user:
     name: "{{ jenkinslts_user }}"
     comment: Jenkins Automation Server
     group: "{{ jenkinslts_group }}"
@@ -16,7 +16,7 @@
     state: "{{ jenkinslts_user_desired_state }}"
 
 - name: EL Family | Adding repository {{ jenkinslts_repo_el }}
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: "{{ jenkinslts_repo_el_name }}"
     description: "{{ jenkinslts_repo_el_description }}"
     baseurl: "{{ jenkinslts_repo_el }}"
@@ -26,7 +26,7 @@
     state: "{{ jenkinslts_repo_desired_state }}"
 
 - name: EL Family | Installing {{ jenkinslts_app_name }}
-  yum:
+  ansible.builtin.yum:
     name: "{{ jenkinslts_app_name }}"
     state: "{{ jenkinslts_desired_state }}"
     update_cache: yes
