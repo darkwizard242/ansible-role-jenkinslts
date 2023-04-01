@@ -24,8 +24,8 @@ jenkinslts_user_home: "/var/lib/{{ jenkinslts_user }}"
 jenkinslts_user_shell: /bin/false
 jenkinslts_user_desired_state: present
 jenkinslts_app_name: jenkins
-jenkinslts_debian_gpg_key: https://pkg.jenkins.io/debian-stable/jenkins.io.key
-jenkinslts_el_gpg_key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+jenkinslts_debian_gpg_key: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+jenkinslts_el_gpg_key: https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 jenkinslts_repo_debian: deb https://pkg.jenkins.io/debian-stable binary/
 jenkinslts_repo_debian_filename: "{{ jenkinslts_app_name }}"
 jenkinslts_repo_el_name: jenkins
